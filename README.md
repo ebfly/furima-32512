@@ -1,6 +1,5 @@
 # README
 
-
 ## users テーブル
 
 | Column                | Type     | Options     |
@@ -18,7 +17,7 @@
 ### Association
 - has_many :items
 - has_many :orders
-- has_one  :addresses
+- has_one  :address
 
 ## items テーブル
 
@@ -35,31 +34,33 @@
 | user_id           | integer    | null: false                   |
 
 ### Association 
-- belongs_to :users
-- has_one :orders
+- belongs_to :user
+- has_one :order
 
 ## addresses テーブル
 
-| Column              | Type         | Options                              |
-| ------------------  | -----------  | -----------------------------------  |
-| post_code           | string       | null: false, foreign_key :true       |
-| prefecture          | integer      | null: false                          |
-| city                | string       | null: false                          |
-| address             | string       | null: false                          |
-| building_name       | string       | null: false                          |
-| phone_number        | integer      | null: false                          |
+| Column           | Type      | Options                         |
+| ---------------  | -------   | ------------------------------  |   
+| post_code        | string    | null: false, foreign_key :true  |
+| prefecture_id    | integer   | null: false                     |
+| city             | string    | null: false                     |
+| address          | string    | null: false                     |
+| building_name    | string    |                                 |
+| phone_number     | string    | null: false                     |
 
 ### Association
-- has_one :users
+- belongs_to :user
+- belongs_to :order
 
 ## orders テーブル
 
-| Column              | Type           | Options                              |
-| ------------------  | -------------  | -----------------------------------  |
-| user_id             | references     | null: false                          |
-| item                | string         | null: false                          |
+| Column        | Type           | Options                           |
+| ------------  | -------------  | --------------------------------  |
+| user          | references     | null: false                       |
+| item          | string         | null: false                       |
 
 ### Association
 
-- belongs_to :users
-- has_one    :items
+- has_one       :address
+- belongs_to    :user
+- belongs_to    :item
