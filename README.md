@@ -1,24 +1,65 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## users テーブル
 
-* Ruby version
+| Column                | Type     | Options     |
+| --------------------  | -------  | ----------- |
+| nickname              | string   | null: false |
+| email                 | string   | null: false |
+| password              | string   | null: false |
+| profile               | string   | null: false |
+| family_name           | string   | null: false |
+| first_name            | string   | null: false |
+| family_name_kana      | string   | null: false |
+| first_name_kana       | string   | null: false |
+| birth_day             | date     | null: false |
 
-* System dependencies
+### Association
+- has_many :items
+- has_many :orders
+- has_one  :addresses
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column            | Type       | Options                       |
+| ------------      | ---------  | ----------------------------  |
+| name              | string     | null: false, foreign_key true |
+| image             | ---------  | ----------------------------  |
+| text              | text       | null: false                   |
+| category          | integer    | null: false                   |
+| condition         | integer    | null: false                   |
+| price             | integer    | null: false                   |
+| prefecture        | integer    | null: false                   |
+| shipping_date     | integer    | null: false                   |
+| user_id           | integer    | null: false                   |
 
-* Database initialization
+### Association 
+- belongs_to :users
+- has_one :orders
 
-* How to run the test suite
+## addresses テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column              | Type         | Options                              |
+| ------------------  | -----------  | -----------------------------------  |
+| post_code           | string       | null: false, foreign_key :true       |
+| prefecture          | integer      | null: false                          |
+| city                | string       | null: false                          |
+| address             | string       | null: false                          |
+| building_name       | string       | null: false                          |
+| phone_number        | integer      | null: false                          |
 
-* Deployment instructions
+### Association
+- has_one :users
 
-* ...
+## orders テーブル
+
+| Column              | Type           | Options                              |
+| ------------------  | -------------  | -----------------------------------  |
+| user_id             | references     | null: false                          |
+| item                | string         | null: false                          |
+
+### Association
+
+- belongs_to :users
+- has_one    :items
