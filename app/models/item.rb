@@ -10,8 +10,10 @@ class Item < ApplicationRecord
   
   #空の出品を保存できない
   with_options presence: true do
-    validates :name, :text, :user
-    validates :price, numericality: {greater_than: 299, less_than: 10000000, message: "Price Out of setting range"}
+   validates :name, length: { maximum: 40 }
+   validates :text, length: { maximum: 1000 }
+   validates :user
+   validates :price, numericality: {greater_than: 299, less_than: 10000000, message: "Out of setting range"}
   end
 
   #各項目の選択が「---」の時は保存できない
