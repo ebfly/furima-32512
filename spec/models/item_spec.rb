@@ -50,10 +50,35 @@ describe Item do
         expect(@item.errors.full_messages).to include("Category is not a number")
       end
 
+      it "category_idが1の場合は登録できないこと" do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+
+
+      it "condition_idがない場合は登録できないこと" do
+        @item.condition_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition is not a number")
+      end
+
+      it "condition_idが1の場合は登録できないこと" do
+        @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition must be other than 1")
+      end
+
       it "shipping_fee_burden_idがない場合は登録できないこと" do
         @item.shipping_fee_burden_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping fee burden is not a number")
+      end
+
+      it "shipping_fee_burden_idが1の場合は登録できないこと" do
+        @item.shipping_fee_burden_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping fee burden must be other than 1")
       end
 
       it "prefecture_idがない場合は登録できないこと" do
@@ -62,10 +87,22 @@ describe Item do
         expect(@item.errors.full_messages).to include("Prefecture is not a number")
       end
 
+      it "prefecture_idが1の場合は登録できないこと" do
+        @item.prefecture_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
+      end
+
       it "shipping_date_idがない場合は登録できないこと" do
         @item.shipping_date_id = ""
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping date is not a number")
+      end
+
+      it "shipping_date_idが1の場合は登録できないこと" do
+        @item.shipping_date_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping date must be other than 1")
       end
 
       it "priceがない場合は登録できないこと" do
@@ -87,13 +124,13 @@ describe Item do
       end
 
       it "priceが299以下だと登録できない" do
-        @item.price =  "299"
+        @item.price =  299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
       end
 
       it "priceが10000000だと登録できないこと" do
-        @item.price = "10000000"
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
       end

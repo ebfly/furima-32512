@@ -7,7 +7,7 @@ FactoryBot.define do
     prefecture_id           {2}
     shipping_date_id        {2}
     shipping_fee_burden_id  {2}
-    price                   {"5555"}
+    price                   {5555}
     association :user
   end
 end
