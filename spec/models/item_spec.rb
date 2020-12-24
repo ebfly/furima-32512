@@ -85,7 +85,6 @@ describe Item do
         @item.valid?
         expect(@item.errors.full_messages).to include("Text is too long (maximum is 1000 characters)")
       end
-   
 
       it "priceが299以下だと登録できない" do
         @item.price =  "299"
