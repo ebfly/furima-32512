@@ -9,6 +9,7 @@ describe Item do
     context "出品がうまくいくとき" do
       it "全ての項目が存在すれば登録できる" do
         expect(@item).to be_valid
+        expect(@item.image).to be_valid
       end
 
       it "nameが40文字で登録できる" do
@@ -117,7 +118,7 @@ describe Item do
         expect(@item.errors.full_messages).to include("Name is too long (maximum is 40 characters)")
       end
 
-      it "textが1001文字だと登録できないこと" do
+      it "textが1001文字だと登録できない" do
         @item.text ="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         @item.valid?
         expect(@item.errors.full_messages).to include("Text is too long (maximum is 1000 characters)")
@@ -129,10 +130,34 @@ describe Item do
         expect(@item.errors.full_messages).to include("Price Out of setting range")
       end
 
-      it "priceが10000000だと登録できないこと" do
+      it "priceが10000000だと登録できない" do
         @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it "priceが全角文字だと登録できない" do
+        @item.price = "いくよくるよ"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it "priceが半角英語だと登録できない" do
+        @item.price = "ikuyokruyo"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it "priceが半角英英数字混合だと登録できない" do
+        @item.price = "ikuyo964"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it "imageが空だと登録できない" do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
       end
     end
   end

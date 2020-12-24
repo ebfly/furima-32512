@@ -12,8 +12,10 @@ class Item < ApplicationRecord
   with_options presence: true do
    validates :name, length: { maximum: 40 }
    validates :text, length: { maximum: 1000 }
-   validates :user
-   validates :price, numericality: {greater_than: 299, less_than: 10000000, message: "Out of setting range"}
+   validates :user, :image
+   VALID_PRICEL_HALF =  /\A[0-9]+\z/
+   validates :price, numericality: {greater_than: 299, less_than: 10000000, message: "Out of setting range"},
+              format: {with: VALID_PRICEL_HALF, message: "Half-width number"}
   end
 
   #各項目の選択が「---」の時は保存できない
