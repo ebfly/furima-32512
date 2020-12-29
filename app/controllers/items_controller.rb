@@ -39,9 +39,11 @@ class ItemsController < ApplicationController
 
   def destroy
     if current_user.id == @item.user_id
-      @item.destroy
+      @item.destroy 
+      redirect_to root_path, notice: "Comleted to delete"
+    else
+      render :show, alert: "Failed to delete"
     end
-    redirect_to root_path alert: "Failed to delete"
   end
 
   private
