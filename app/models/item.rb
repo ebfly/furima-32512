@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_date
   belongs_to :shipping_fee_burden
   has_one_attached :image
+  has_one :order
   
   #空の出品を保存できない
   with_options presence: true do

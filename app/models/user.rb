@@ -4,13 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :items
-  has_one :address
   has_one :order
-
+  has_one :address
+  
   with_options presence: true do
     validates :nickname, length: { maximum: 40 }
     validates :email
-    # 全角ひらがな、カタカナ、漢字で入力させるオプション
+  # 全角ひらがな、カタカナ、漢字で入力させるオプション
     NAME＿REGEX =  /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/
     validates_format_of :last_name, :first_name, with: NAME＿REGEX, message: "Full-width characters"
     NAME_KANA_REGEX = /\A[\p{katakana}ー－&&[^ -~｡-ﾟ]]+\z/
