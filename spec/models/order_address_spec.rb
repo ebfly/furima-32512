@@ -59,7 +59,7 @@ RSpec.describe OrderAddress do
       end
 
       it 'phone_numberにハイフンが入力されていると保存できないこと' do
-        @order_address.phone_number = "-"
+        @order_address.phone_number = "090-1111-2222"
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid. Include half-width numbers")
       end
