@@ -9,7 +9,7 @@ class OrderAddress
     validates :token
     validates :user_id
     validates :item_id
-    validates :phone_number, format: { with: /\A0[0-9]+\z/, message: 'is invalid. Include half-width numbers' } 
+    validates :phone_number, format: { with: /\A\d{10}\z|\A\d{11}\z/, message: 'is invalid. Include half-width numbers' } 
     validates :post_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'is invalid. Include hyphen(-)' }
   end
   validates :prefecture_id, numericality: { other_than: 1 }
