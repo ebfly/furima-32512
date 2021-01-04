@@ -1,8 +1,8 @@
 FactoryBot.define do
-  factory :order_adddress do
+  factory :order_address do
     post_code { '123-4567' }
-    prefecture { 1 }
-    city { '東京都' }
+    prefecture_id { 1 }
+    city { '西東京市' }
     house_number { '1-1' }
     building_name { '東京ハイツ' }
     phone_number {'09011112222'}

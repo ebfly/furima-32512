@@ -1,4 +1,4 @@
-/* const pay = () => {
+const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY); //テスト公開鍵を環境変数に設定
   const form = document.getElementById("charge-form");
   form.addEventListener("submit", (e) => {
@@ -19,17 +19,17 @@
       if (status == 200) {
         const token = response.id;
         const renderDom = document.getElementById("charge-form");
-        const tokenObj = `<input value=${token} name='order_address[token]' type="text">`;
+        const tokenObj = `<input value=${token} name='token' type='hidden'>`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
       }
-      document.getElementById("card_number").removeAttribute("name");
-      document.getElementById("card_cvc").removeAttribute("name");
-      document.getElementById("card_exp_month").removeAttribute("name");
-      document.getElementById("card_exp_year").removeAttribute("name");
+      
+      document.getElementById("card-number").removeAttribute("name");
+      document.getElementById("card-cvc").removeAttribute("name");
+      document.getElementById("card-exp-month").removeAttribute("name");
+      document.getElementById("card-exp-year").removeAttribute("name");
       
       document.getElementById("charge-form").submit();
     });
   });
 };
 window.addEventListener("load", pay);
- */

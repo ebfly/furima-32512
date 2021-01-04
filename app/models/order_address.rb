@@ -1,7 +1,7 @@
 class OrderAddress
   include ActiveModel::Model
   #user,item.addressのカラム名を記述
-  attr_accessor :post_code, :prefecture_id, :city, :house_number, :buliding_name, :phone_number, :user_id, :item_id, :token
+  attr_accessor :post_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
     validates :city, :house_number, :token, :user_id, :item_id
@@ -14,6 +14,6 @@ class OrderAddress
     #注文情報を保存
     order_address = Order.create(user_id: user_id, item_id: item_id)
     #住所の情報を保存
-    Address.create(post_code: post_code, prefecture_id: prefecture_id, city: city, house_number: house_number, buliding_name: buliding_name, phone_number: phone_number, order_address: order_address.id)
+    Address.create(post_code: post_code, prefecture_id: prefecture_id, city: city, house_number: house_number, building_name: building_name, phone_number: phone_number, order_id: order_address.id)
   end
 end
