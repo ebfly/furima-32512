@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order("created_at DESC")
-    
   end
 
   def new
@@ -24,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user == @item.user
+    unless current_user == @item.user_id || @item.order == nil
       redirect_to root_path
     end
   end
@@ -39,9 +38,11 @@ class ItemsController < ApplicationController
 
   def destroy
     if current_user.id == @item.user_id
-      @item.destroy
+      @item.destroy 
+      redirect_to root_path, notice: "Comleted to delete"
+    else
+      render :show, alert: "Failed to delete"
     end
-    redirect_to root_path alert: "Failed to delete"
   end
 
   private
